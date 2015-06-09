@@ -25,6 +25,7 @@ set (ewoms_DEPS
 	"opm-material REQUIRED"
 	"dune-alugrid"
 	"dune-cornerpoint"
+	"dune-fem"
 	# valgrind client requests
 	"Valgrind"
 	# quadruple precision floating point calculations
