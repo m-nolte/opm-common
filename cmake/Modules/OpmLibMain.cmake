@@ -37,7 +37,7 @@ endif (CMAKE_VERSION VERSION_LESS "2.8.3")
 if (CMAKE_VERSION VERSION_LESS "2.8.5")
 	message (STATUS "Enabling compatibility modules for CMake 2.8.5")
 	list (APPEND CMAKE_MODULE_PATH "${OPM_MACROS_ROOT}/cmake/Modules/compat-2.8.5")
-endif (CMAKE_VERSION VERSION_LESS "2.8.5")	
+endif (CMAKE_VERSION VERSION_LESS "2.8.5")
 
 if (CMAKE_VERSION VERSION_LESS "2.8.7")
 	message (STATUS "Enabling compatibility modules for CMake 2.8.7")
@@ -223,6 +223,8 @@ if (BUILD_EXAMPLES)
 	opm_compile_satellites (${project} examples "" "")
 endif (BUILD_EXAMPLES)
 
+opm_compile_satellites (${project} additionals EXCLUDE_FROM_ALL "")
+
 # attic are programs which are not quite abandoned yet; however, they
 # are not actively maintained, so they should not be a part of the
 # default compile
@@ -242,6 +244,14 @@ macro (cond_disable_test name)
 	endif ((NOT DEFINED HAVE_${name}) OR (NOT HAVE_${name}))
 endmacro (cond_disable_test name)
 
+# use this target to run all tests
+add_custom_target (check
+	COMMAND ${CMAKE_CTEST_COMMAND}
+	DEPENDS test-suite
+	COMMENT "Checking if library is functional"
+	VERBATIM
+	)
+
 # special processing for tests
 if (COMMAND tests_hook)
 	tests_hook ()
@@ -252,14 +262,6 @@ if (BUILD_TESTING)
 	opm_data (tests datafiles "${tests_DIR}")
 	opm_compile_satellites (${project} tests "" "${tests_REGEXP}")
 endif (BUILD_TESTING)
-
-# use this target to run all tests
-add_custom_target (check
-	COMMAND ${CMAKE_CTEST_COMMAND}
-	DEPENDS test-suite
-	COMMENT "Checking if library is functional"
-	VERBATIM
-	)
 
 # use this target to check local git commits
 add_custom_target(check-commits
@@ -299,3 +301,5 @@ include (UseVersion)
 
 # update the cache for next run
 write_back_options ()
+
+finalize_compiler_script()

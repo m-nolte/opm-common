@@ -38,7 +38,7 @@ macro (opm_compile opm)
 	# unset this variable to signal that no library is generated
 	set (${opm}_TARGET)
   endif (${opm}_SOURCES)
-  
+
   # pre-compile common headers; this is setup *after* the library to pick
   # up extra options set there
   if (PRECOMPILE_HEADERS)
@@ -54,6 +54,7 @@ macro (opm_compile opm)
 	  TARGET ${opm}_CXX_pch
 	  FLAGS  ${opm}_PRECOMP_CXX_FLAGS
 	  )
+  message("CXX flags ${${opm}_PRECOMP_FLAGS}")
 	# must set property on source files instead of entire target, because
 	# it only applies to C++ modules (and cannot be used for C)
 	set_source_files_properties (${${opm}_CXX_SOURCES} PROPERTIES
@@ -67,5 +68,5 @@ macro (opm_compile opm)
   if (${opm}_TARGET)
 	get_target_property (${opm}_LIBRARY ${${opm}_TARGET} LOCATION)
   endif (${opm}_TARGET)
-  
+
 endmacro (opm_compile opm)
