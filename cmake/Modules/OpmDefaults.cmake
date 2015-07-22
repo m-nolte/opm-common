@@ -3,6 +3,8 @@
 include (UseCompVer)
 is_compiler_gcc_compatible ()
 include(TestCXXAcceptsFlag)
+include(OverloadCompilerFlags)
+initialize_compiler_script()
 
 macro (opm_defaults opm)
   # if we are installing a development version (default when checking out of
