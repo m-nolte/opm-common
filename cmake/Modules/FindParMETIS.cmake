@@ -20,6 +20,8 @@
 # find_package(ParMETIS)
 
 find_package(MPI)
+
+if(MPI_C_FOUND)
 macro(_search_parmetis_lib libvar libname doc)
   find_library(${libvar} ${libname}
     PATHS ${PARMETIS_ROOT} ${PARMETIS_ROOT}/lib PATH_SUFFIXES ${PATH_SUFFIXES}
@@ -89,3 +91,4 @@ if(PARMETIS_FOUND)
 endif(PARMETIS_FOUND)
 
 mark_as_advanced(PARMETIS_INCLUDE_DIRS PARMETIS_LIBRARIES HAVE_PARMETIS)
+endif()
