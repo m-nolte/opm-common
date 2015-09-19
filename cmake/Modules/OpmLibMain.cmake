@@ -53,6 +53,8 @@ project (${${project}_NAME})
 enable_language (C)
 enable_language (CXX)
 
+include(OverloadCompilerFlags)
+
 # print system information to better pinpoint issues from log alone
 include (UseSystemInfo)
 system_info ()
@@ -65,6 +67,8 @@ vcs_info ()
 include (UseCompVer)
 compiler_info ()
 linker_info ()
+
+initialize_compiler_script()
 
 # default settings: build static debug library
 include (OpmDefaults)
@@ -300,3 +304,4 @@ include (UseVersion)
 
 # update the cache for next run
 write_back_options ()
+finalize_compiler_script()

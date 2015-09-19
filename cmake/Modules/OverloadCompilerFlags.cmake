@@ -59,7 +59,9 @@ endmacro(find_extended_unix_commands)
 
 # init compiler script and store CXX flags
 macro(initialize_compiler_script)
+  message(WARNING "Generating compiler script 1")
   if(ALLOW_CXXFLAGS_OVERWRITE AND (${CMAKE_GENERATOR} MATCHES ".*Unix Makefiles.*"))
+    message(WARNING "Generating compiler script")
     # check for unix commands necessary
     find_extended_unix_commands()
     # set CXXFLAGS as environment variable
