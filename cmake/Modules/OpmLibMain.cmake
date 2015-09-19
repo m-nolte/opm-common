@@ -68,6 +68,7 @@ include (UseCompVer)
 compiler_info ()
 linker_info ()
 
+# if overloading of CXXFLAGS is desired, start this process here
 initialize_compiler_script()
 
 # default settings: build static debug library
@@ -304,4 +305,6 @@ include (UseVersion)
 
 # update the cache for next run
 write_back_options ()
+
+# finalize compiler script if enabled
 finalize_compiler_script()
