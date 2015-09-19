@@ -18,7 +18,7 @@
 option(ALLOW_CXXFLAGS_OVERWRITE OFF)
 
 # check whether the user wants to append compile flags upon calling make
-if(ALLOW_EXTRA_CXXFLAGS AND (${CMAKE_GENERATOR} MATCHES ".*Unix Makefiles.*"))
+if(ALLOW_EXTRA_CXXFLAGS AND (${CMAKE_GENERATOR} MATCHES "Unix Makefiles"))
   message("ALLOW_EXTRA_CXXFLAGS is deprecated, please use -DALLOW_CXXFLAGS_OVERWRITE=ON")
   set(ALLOW_CXXFLAGS_OVERWRITE ON)
 endif()
@@ -59,9 +59,7 @@ endmacro(find_extended_unix_commands)
 
 # init compiler script and store CXX flags
 macro(initialize_compiler_script)
-  message(WARNING "Generating compiler script 1")
-  if(ALLOW_CXXFLAGS_OVERWRITE AND (${CMAKE_GENERATOR} MATCHES ".*Unix Makefiles.*"))
-    message(WARNING "Generating compiler script")
+  if(ALLOW_CXXFLAGS_OVERWRITE AND (${CMAKE_GENERATOR} MATCHES "Unix Makefiles"))
     # check for unix commands necessary
     find_extended_unix_commands()
     # set CXXFLAGS as environment variable
@@ -77,7 +75,7 @@ endmacro()
 
 # finalize compiler script and write it
 macro(finalize_compiler_script)
-  if(ALLOW_CXXFLAGS_OVERWRITE AND (${CMAKE_GENERATOR} MATCHES ".*Unix Makefiles.*"))
+  if(ALLOW_CXXFLAGS_OVERWRITE AND (${CMAKE_GENERATOR} MATCHES "Unix Makefiles"))
     set( COMPILER_SCRIPT_FILE "#!${BASH}\nSED=${SED_PROGRAM}\nGREP=${GREP_PROGRAM}")
     set( COMPILER_SCRIPT_FILE "${COMPILER_SCRIPT_FILE}\nCUT=${CUT_PROGRAM}\nENV=${ENV_PROGRAM}\nECHO=${ECHO_PROGRAM}")
     set( COMPILER_SCRIPT_FILE "${COMPILER_SCRIPT_FILE}\n# store flags\nFLAGS=\"\$@\"")
