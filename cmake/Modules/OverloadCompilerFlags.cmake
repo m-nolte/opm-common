@@ -60,6 +60,8 @@ endmacro(find_extended_unix_commands)
 # init compiler script and store CXX flags
 macro(initialize_compiler_script)
   if(ALLOW_CXXFLAGS_OVERWRITE AND (${CMAKE_GENERATOR} MATCHES "Unix Makefiles"))
+    # this only works with build type custom
+    set(CMAKE_BUILD_TYPE Custom)
     # check for unix commands necessary
     find_extended_unix_commands()
     # set CXXFLAGS as environment variable
