@@ -37,7 +37,7 @@ endif (CMAKE_VERSION VERSION_LESS "2.8.3")
 if (CMAKE_VERSION VERSION_LESS "2.8.5")
 	message (STATUS "Enabling compatibility modules for CMake 2.8.5")
 	list (APPEND CMAKE_MODULE_PATH "${OPM_MACROS_ROOT}/cmake/Modules/compat-2.8.5")
-endif (CMAKE_VERSION VERSION_LESS "2.8.5")	
+endif (CMAKE_VERSION VERSION_LESS "2.8.5")
 
 if (CMAKE_VERSION VERSION_LESS "2.8.7")
 	message (STATUS "Enabling compatibility modules for CMake 2.8.7")
@@ -276,7 +276,6 @@ include (OpmDoc)
 opm_doc (${project} ${doxy_dir})
 
 # provide compatibility with using this build in dunecontrol
-include (DuneCompat)
 include (LibtoolArchives)
 if (${project}_TARGET)
 	configure_la (${project} ${${project}_TARGET} ${project}_LIBTOOL_ARCHIVE)
