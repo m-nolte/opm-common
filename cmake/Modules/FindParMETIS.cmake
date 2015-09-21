@@ -91,4 +91,6 @@ if(PARMETIS_FOUND)
 endif(PARMETIS_FOUND)
 
 mark_as_advanced(PARMETIS_INCLUDE_DIRS PARMETIS_LIBRARIES HAVE_PARMETIS)
-endif()
+else(MPI_C_FOUND)
+  message(WARNING "MPI not found ==> ParMETIS disabled! Plase make sure -DUSE_MPI=ON was set if you need ParMETIS.")
+endif(MPI_C_FOUND)
