@@ -271,6 +271,9 @@ for OPT in "$@"; do
               rootvar="$(uppercase ${pkgname})_ROOT"
               rootvar="${rootvar/-/_}"
               ;;
+            cxxoverload)
+              rootvar="ALLOW_CXXFLAGS_OVERWRITE=ON"
+              ;;
             *)
               invalid_opt --with-${pkgname}
               rootvar=""
