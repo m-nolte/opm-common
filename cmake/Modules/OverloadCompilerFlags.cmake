@@ -65,7 +65,7 @@ macro(initialize_compiler_script)
     # check for unix commands necessary
     find_extended_unix_commands()
     # set CXXFLAGS as environment variable
-    set( DEFAULT_CXXFLAGS ${CMAKE_CXX_FLAGS})
+    set( DEFAULT_CXXFLAGS ${CMAKE_CXX_FLAGS} CACHE STRING "Default compiler flags")
     set( CMAKE_CXX_FLAGS "" )
     set( DEFAULT_CXX_COMPILER ${CMAKE_CXX_COMPILER} )
     set( COMPILER_SCRIPT_FILE "#!${BASH}\nexec ${CMAKE_CXX_COMPILER} \"\$@\"")
