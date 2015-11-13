@@ -35,7 +35,7 @@ find_opm_package (
   ""
 
   # test program
-"#include <dune/alugrid/3d/topology.hh>
+"#include <dune/alugrid/common/interfaces.hh>
 int main (void) {
    return 0;
 }
