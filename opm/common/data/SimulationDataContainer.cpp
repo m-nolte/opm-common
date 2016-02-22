@@ -17,6 +17,7 @@
   along with OPM.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <opm/common/ErrorMacros.hpp>
 #include <opm/common/util/numeric/cmp.hpp>
 #include <opm/common/data/SimulationDataContainer.hpp>
 
@@ -75,6 +76,39 @@ namespace Opm {
     }
 
 
+    void SimulationDataContainer::setCellDataComponent( const std::string& key ,
+                                                        size_t component ,
+                                                        const std::vector<int>& cells ,
+                                                        const std::vector<double>& values) {
+        auto& data = getCellData( key );
+        if (component >= m_num_phases)
+            OPM_THROW(std::invalid_argument, "The component number: " << component << " is invalid");
+
+
+        if (cells.size() != values.size())
+            OPM_THROW(std::invalid_argument, "size mismatch between cells and values");
+
+        // This is currently quite broken; the setCellDataComponent
+        // method assumes that the number of components in the field
+        // we are currently focusing on has num_phases components in
+        // total. This restriction should be lifted by allowing a per
+        // field number of components.
+
+        if (data.size() != m_num_phases * m_num_cells)
+            OPM_THROW(std::invalid_argument , "Can currently only be used on fields with num_components == num_phases (i.e. saturation...) ");
+
+
+        for (size_t i = 0; i < cells.size(); i++) {
+            if (size_t(cells[i]) < m_num_cells) {
+                auto field_index = cells[i] * m_num_phases + component;
+                data[field_index] = values[i];
+            } else {
+                OPM_THROW(std::invalid_argument , "The cell number: " << cells[i] << " is invalid.");
+            }
+        }
+    }
+
+
     bool SimulationDataContainer::hasFaceData( const std::string& name ) const {
         return ( m_face_data.find( name ) == m_face_data.end() ? false : true );
     }
@@ -119,7 +153,7 @@ namespace Opm {
 
             if (other.hasCellData( key )) {
                 const auto& other_data = other.getCellData( key );
-                if (!cmp::double_vector_equal( data , other_data ))
+                if (!cmp::vector_equal<double>( data , other_data ))
                     return false;
             } else
                 return false;
@@ -131,7 +165,7 @@ namespace Opm {
 
             if (other.hasFaceData( key )) {
                 const auto& other_data = other.getFaceData( key );
-                if (!cmp::double_vector_equal( data , other_data ))
+                if (!cmp::vector_equal<double>( data , other_data ))
                     return false;
             } else
                 return false;
