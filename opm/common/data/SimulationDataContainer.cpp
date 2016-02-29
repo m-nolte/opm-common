@@ -174,6 +174,15 @@ namespace Opm {
         return true;
     }
 
+    size_t SimulationDataContainer::numCellDataComponents( const std::string& name ) const {
+        const auto& data = getCellData( name );
+        return data.size() / m_num_cells;
+    }
+
+
+    const std::unordered_map<std::string, std::vector<double>> SimulationDataContainer::cellData() const {
+        return m_cell_data;
+    }
 
 
     /* This is very deprecated. */
@@ -203,6 +212,26 @@ namespace Opm {
     }
 
     std::vector<double>& SimulationDataContainer::faceflux() {
+        return getFaceData("FACEFLUX");
+    }
+
+    const std::vector<double>& SimulationDataContainer::pressure( ) const {
+        return getCellData("PRESSURE");
+    }
+
+    const std::vector<double>& SimulationDataContainer::temperature() const {
+        return getCellData("TEMPERATURE");
+    }
+
+    const std::vector<double>& SimulationDataContainer::saturation() const {
+        return getCellData("SATURATION");
+    }
+
+    const std::vector<double>& SimulationDataContainer::facepressure() const {
+        return getFaceData("FACEPRESSURE");
+    }
+
+    const std::vector<double>& SimulationDataContainer::faceflux() const {
         return getFaceData("FACEFLUX");
     }
 
