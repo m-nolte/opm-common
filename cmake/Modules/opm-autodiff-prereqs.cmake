@@ -14,13 +14,14 @@ set (opm-autodiff_DEPS
 	"CXX11Features"
 	# Various runtime library enhancements
 	"Boost 1.44.0
-		COMPONENTS date_time filesystem system iostreams unit_test_framework REQUIRED"
+		COMPONENTS date_time filesystem system unit_test_framework REQUIRED"
 	# DUNE prerequisites
 	"dune-common REQUIRED;
-	dune-istl REQUIRED;
-	dune-cornerpoint;
-	opm-common REQUIRED;
-	opm-core REQUIRED"
+	dune-istl REQUIRED"
+	# OPM dependency
+	"opm-common REQUIRED;
+	opm-core REQUIRED;
+	dune-cornerpoint"
 	# Eigen
 	"Eigen3 3.2.0"
 	)

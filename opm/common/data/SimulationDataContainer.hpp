@@ -94,7 +94,8 @@ namespace Opm {
         const std::vector<double>& facepressure() const;
         const std::vector<double>& faceflux    () const;
 
-        const std::unordered_map<std::string, std::vector<double>> cellData() const;
+        const std::unordered_map<std::string, std::vector<double>>& cellData() const;
+        std::unordered_map<std::string, std::vector<double>>& cellData();
     private:
         void  addDefaultFields();
 
