@@ -44,8 +44,7 @@ int main (void) {
 }
 "
   # config variables
-  "HAVE_DUNE_FEM;
-   HAVE_METIS;
+  "HAVE_METIS;
    HAVE_ZLIB;
    HAVE_ZOLTAN
   ")

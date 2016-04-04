@@ -39,8 +39,8 @@ int main (void) {
 }
 "
   # config variables
-  "HAVE_DUNE_FEM_DG;
-  ")
+  ""
+  )
 
 #debug_find_vars ("dune-grid")
 
