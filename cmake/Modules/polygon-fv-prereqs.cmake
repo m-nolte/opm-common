@@ -5,6 +5,19 @@
 # are not interested in anyway)
 set(DUNE_AVOID_CAPABILITIES_IS_PARALLEL_DEPRECATION_WARNING 1)
 
+
+# defines that must be present in config.h for our headers
+set (polygon-fv_CONFIG_VAR
+  HAVE_DUNE_COMMON
+  HAVE_DUNE_GEOMETRY
+  HAVE_DUNE_GRID
+  HAVE_DUNE_LOCALFUNCTIONS
+  HAVE_DUNE_ISTL
+  HAVE_DUNE_ALUGRID
+  HAVE_DUNE_FEM
+  DUNE_AVOID_CAPABILITIES_IS_PARALLEL_DEPRECATION_WARNING
+  )
+
 # dependencies
 set (polygon-fv_DEPS
 	# compile with C++0x/11 support if available
@@ -13,6 +26,7 @@ set (polygon-fv_DEPS
 	"dune-common REQUIRED"
 	"dune-geometry REQUIRED"
 	"dune-grid REQUIRED"
+	"dune-fem REQUIRED"
 	"dune-alugrid"
 	"dune-cornerpoint"
 	)
